@@ -9,13 +9,14 @@ const Income = ({ incomes, onDelete }) => {
         setSelectedFilter(selectedCategory)
     }
     const handelSort = (d) => {
-        const shortedeExpense = [...incomes].sort((a, b) => (a.amount - b.amount));
-        if (d == 'lth') {
-            return setShortData(shortedeExpense);
-        } else if (d == "htl") {
-            return setShortData([...incomes].sort((a, b) => (b.amount - a.amount)))
-        }
-        return true
+        setShortData(d)
+        // const shortedeExpense = [...incomes].sort((a, b) => (a.amount - b.amount));
+        // if (d == 'lth') {
+        //     return setShortData(shortedeExpense);
+        // } else if (d == "htl") {
+        //     return setShortData([...incomes].sort((a, b) => (b.amount - a.amount)))
+        // }
+        // return true
     }
 
     return (
@@ -25,17 +26,13 @@ const Income = ({ incomes, onDelete }) => {
                 onSort={handelSort}
             />
             <div className="p-4 divide-y">
-                {
-                    shortData.length > 0 ? <IncomeList
-                        selectedFilter={selectedFilter}
-                        incomes={shortData}
-                        onDelete={onDelete}
-                    /> : <IncomeList
-                        selectedFilter={selectedFilter}
-                        incomes={incomes}
-                        onDelete={onDelete}
-                    />
-                }
+
+                <IncomeList
+                    selectedFilter={selectedFilter}
+                    incomes={incomes}
+                    onDelete={onDelete}
+                    shortData={shortData}
+                />
 
             </div>
         </div>

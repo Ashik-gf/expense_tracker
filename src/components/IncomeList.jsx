@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IncomeList = ({ incomes, selectedFilter, onDelete }) => {
+const IncomeList = ({ incomes, selectedFilter, onDelete, shortData }) => {
 
 
     return (
@@ -10,6 +10,13 @@ const IncomeList = ({ incomes, selectedFilter, onDelete }) => {
                 incomes.filter(incom => {
                     if (selectedFilter.length > 0) {
                         return selectedFilter.includes(incom.category.toLowerCase())
+                    }
+                    return true
+                }).sort((a, b) => {
+                    if (shortData == "lth") {
+                        return (a.amount - b.amount)
+                    } else {
+                        return (b.amount - a.amount)
                     }
                     return true
                 }).map((income) =>

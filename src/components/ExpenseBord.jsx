@@ -9,7 +9,6 @@ const ExpenseBord = () => {
     const [incomes, setIncome] = useState(initialIncome);
     const [expenses, setExpenses] = useState(initialExpenses)
 
-
     const handelIncome = (newIncome) => {
         // Find if an existing income has the same ID
         const existingIncome = incomes.find((income) => income.id === newIncome.id);
@@ -35,11 +34,16 @@ const ExpenseBord = () => {
         }
 
     }
+    // income delete
     const handelDelete = (id) => {
         const newIncome = incomes.filter(income => income.id !== id);
         setIncome(newIncome)
     }
-
+    // expense Delte
+    const handelExpenseDelete = (id) => {
+        const newExpense = expenses.filter((expense) => expense.id !== id)
+        setExpenses(newExpense)
+    }
     return (
         <main className="relative mx-auto mt-10 w-full max-w-7xl">
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -59,6 +63,7 @@ const ExpenseBord = () => {
                         />
                         <Expense
                             expenses={expenses}
+                            onDelete={handelExpenseDelete}
                         />
                     </div>
                 </div>

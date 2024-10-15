@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ExpenseList = ({ expenses, filterExpense }) => {
+const ExpenseList = ({ expenses, filterExpense, onDelete, shortData }) => {
     return (
 
         <div className="p-4 divide-y">
@@ -11,6 +11,14 @@ const ExpenseList = ({ expenses, filterExpense }) => {
                         return filterExpense.includes(exp.category.toLowerCase())
                     }
                     return true
+                }).sort((a, b) => {
+                    if (shortData == 'lth') {
+                        return (a.amount - b.amount)
+                    } else {
+                        return (b.amount - a.amount)
+                    }
+                    return true
+
                 }).map((expense) => (
                     <div key={expense.id} className="flex justify-between items-center py-2 relative group cursor-pointer">
                         <div>
@@ -34,7 +42,9 @@ const ExpenseList = ({ expenses, filterExpense }) => {
                                     </svg>
                                 </button>
 
-                                <button className="hover:text-red-600" role="button" title="Delete">
+                                <button
+                                    onClick={() => onDelete(expense.id)}
+                                    className="hover:text-red-600" role="button" title="Delete">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 
 const FromExpense = ({ onSaveExpense }) => {
+    let counter = 0;
     const [expense, setExpense] = useState({
-        "id": crypto.randomUUID(),
-        "category": "",
-        "amount": "",
-        "date": ""
     })
     const handelExpanseChange = (e) => {
         const name = e.target.name;
         let value = e.target.value;
         setExpense({
             ...expense,
-            [name]: value
+            [name]: value,
+            id: crypto.randomUUID() + counter++,
         })
     }
 

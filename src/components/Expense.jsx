@@ -2,30 +2,28 @@ import React, { useState } from 'react';
 import ExpenseHeader from './ExpenseHeader';
 import ExpenseList from './ExpenseList';
 
-const Expense = ({ expenses }) => {
+const Expense = ({ expenses, onDelete }) => {
     const [filterExpense, setFilterExpense] = useState([]);
     const [lowTohigh, setLowtoHigh] = useState('');
-    const [shortData, setShortData] = useState([]);
+    const [shortData, setShortData] = useState(expenses);
     const handelFilter = (selectedExpense) => {
         setFilterExpense(selectedExpense)
     }
     const handelSort = (d) => {
-        const shortedeExpense = [...expenses].sort((a, b) => (a.amount - b.amount));
-        if (d == 'lth') {
-            return setShortData(shortedeExpense);
-        } else if (d == "htl") {
-            return setShortData([...expenses].sort((a, b) => (b.amount - a.amount)))
-        }
-        return true
+        setShortData(d)
     }
+
     return (
         <div className="border rounded-md">
             {/* <!-- Header --> */}
             <ExpenseHeader onShort={handelSort} onFilter={handelFilter} />
             {/* expenseList */}
-            {
-                shortData.length > 0 ? <ExpenseList expenses={shortData} filterExpense={filterExpense} /> : <ExpenseList expenses={expenses} filterExpense={filterExpense} />
-            }
+            <ExpenseList
+                onDelete={onDelete}
+                expenses={expenses}
+                filterExpense={filterExpense}
+                shortData={shortData}
+            />
 
         </div>
     )
