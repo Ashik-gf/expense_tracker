@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 const FromExpense = ({ onSaveExpense, updateExpense }) => {
     const [updateToex, setUpdateToex] = useState(updateExpense)
-    let counter = 0;
+
     const [expense, setExpense] = useState(updateToex || {
-        id: crypto.randomUUID() + counter++,
+        id: crypto.randomUUID(),
         category: "",
         date: "",
         amount: ""
@@ -78,7 +78,7 @@ const FromExpense = ({ onSaveExpense, updateExpense }) => {
 
             <button
                 type="button"
-                onClick={() => onSaveExpense(expense)}
+                onClick={() => onSaveExpense(expense, isAdd)}
                 className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full">
                 {isAdd ? "Save" : "Update"}
 

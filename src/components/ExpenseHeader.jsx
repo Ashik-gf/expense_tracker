@@ -1,5 +1,46 @@
 import React, { useState } from 'react'
-
+const filterData = [
+    {
+        name: "educations",
+        title: "Educations",
+        id: "1"
+    },
+    {
+        name: "food",
+        title: "Food",
+        id: "2"
+    },
+    {
+        name: "health",
+        title: "Health",
+        id: "3"
+    },
+    {
+        name: "bill",
+        title: "Bill",
+        id: "4"
+    },
+    {
+        name: "insurance",
+        title: "Insurance",
+        id: "5"
+    },
+    {
+        name: "tax",
+        title: "Tax",
+        id: "6"
+    },
+    {
+        name: "transport",
+        title: "Transport",
+        id: "7"
+    },
+    {
+        name: "telephone",
+        title: "Telephone",
+        id: "8"
+    },
+]
 const ExpenseHeader = ({ onFilter, onShort }) => {
     const [openFilter, setOpenFilter] = useState(false)
     const [openShort, setOpenShort] = useState(false)
@@ -23,7 +64,6 @@ const ExpenseHeader = ({ onFilter, onShort }) => {
         setOpenShort(false)
     }
     onFilter(selectedCategory);
-
 
     return (
         <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -113,18 +153,23 @@ const ExpenseHeader = ({ onFilter, onShort }) => {
                         role="menu" aria-orientation="vertical" aria-labelledby="filter-button-2" tabIndex="-1"
                         id="filter-dropdown2">
                         <div className="py-1" role="none">
-                            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-                                <input
-                                    type="checkbox"
-                                    className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                                    id="filter-option-1"
-                                    name='education'
-                                    onChange={handelChange}
+                            {
+                                filterData.map(filter =>
+                                    <label key={filter.id} className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+                                        <input
+                                            type="checkbox"
+                                            className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                                            id="filter-option-1"
+                                            name={filter.name}
+                                            onChange={handelChange}
 
-                                />
-                                <span className="ml-2">Education</span>
-                            </label>
-                            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+                                        />
+                                        <span className="ml-2">{filter.title}</span>
+                                    </label>)
+                            }
+
+
+                            {/* <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
                                 <input
                                     type="checkbox"
                                     className="form-checkbox h-4 w-4 rounded-md text-gray-600"
@@ -142,6 +187,30 @@ const ExpenseHeader = ({ onFilter, onShort }) => {
                                 />
                                 <span className="ml-2">Health</span>
                             </label>
+                            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+                                <input type="checkbox" className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                                    id="filter-option-3"
+                                    name='bill'
+                                    onChange={handelChange}
+                                />
+                                <span className="ml-2">Bill</span>
+                            </label>
+                            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+                                <input type="checkbox" className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                                    id="filter-option-3"
+                                    name='insurance'
+                                    onChange={handelChange}
+                                />
+                                <span className="ml-2">Insurance</span>
+                            </label>
+                            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+                                <input type="checkbox" className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                                    id="filter-option-3"
+                                    name='tax'
+                                    onChange={handelChange}
+                                />
+                                <span className="ml-2">Tax</span>
+                            </label> */}
                         </div>
                     </div>
                 </div>

@@ -12,29 +12,43 @@ const ExpenseBord = () => {
     const [updateExpense, setUpdateExpense] = useState(null);
     const [openExpense, setOpenExpense] = useState(false);
     const [formReset, setFormreset] = useState({})
-    const handelIncome = (newIncome) => {
-        // Find if an existing income has the same ID
-        const existingIncome = incomes.find((income) => income.id === newIncome.id);
-        // Only add if no existing income has the same ID
-        if (!existingIncome) {
-            setIncome([...incomes, newIncome]);
+    const handelIncome = (newIncome, isAdd) => {
+        console.log(newIncome);
+        if (isAdd) {
+            setIncome([
+                ...incomes,
+                newIncome
+            ])
         } else {
-            setIncome([newIncome])
+            setIncome(
+                incomes.map((income) => {
+                    if (income.id === newIncome.id) {
+                        return newIncome;
+                    }
+                    return income;
+                })
+            );
             setUpdateIncome(null)
         }
         setOpenExpense(false);
     };
 
 
-    const handleExpense = (newExpense) => {
-        const existingExpense = expenses.find((expense) => expense.id === newExpense.id)
-        if (!existingExpense) {
+    const handleExpense = (newExpense, isAdd) => {
+        if (isAdd) {
             setExpenses([
                 ...expenses,
                 newExpense
             ])
         } else {
-            setExpenses([newExpense])
+            setExpenses(
+                expenses.map((expense) => {
+                    if (expense.id === newExpense.id) {
+                        return newExpense;
+                    }
+                    return expense;
+                })
+            );
             setUpdateExpense(null)
         }
         setOpenExpense(true);
