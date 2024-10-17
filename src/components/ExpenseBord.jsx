@@ -11,7 +11,7 @@ const ExpenseBord = () => {
     const [updateIncome, setUpdateIncome] = useState(null);
     const [updateExpense, setUpdateExpense] = useState(null);
     const [openExpense, setOpenExpense] = useState(false);
-    const [formReset, setFormreset] = useState({})
+
     const handelIncome = (newIncome, isAdd) => {
         console.log(newIncome);
         if (isAdd) {
@@ -75,10 +75,19 @@ const ExpenseBord = () => {
         setUpdateExpense(expense)
         // for open incomeMOdal
         setOpenExpense(false)
+    }
+    const handelCancel = (value) => {
+        event.preventDefault()
+        if (value === "cancelExpense") {
+            setUpdateExpense(null);
+            setOpenExpense(true)
+        } else {
+            setUpdateIncome(null)
+            setOpenExpense(false)
+        }
 
     }
-
-
+    console.log(updateIncome);
 
 
     return (
@@ -93,6 +102,7 @@ const ExpenseBord = () => {
 
                     openExpense={openExpense}
                     setOpenExpense={setOpenExpense}
+                    onCancel={handelCancel}
 
                 />
                 <div className="lg:col-span-2">

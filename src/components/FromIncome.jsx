@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // Salary, Outsourcing, Bond, Dividend 
-const FromIncome = ({ onSaveIncome, onUpdateIncome }) => {
+const FromIncome = ({ onSaveIncome, onUpdateIncome, onCancel }) => {
     const [income, setIncom] = useState(onUpdateIncome || {
         id: crypto.randomUUID(),
         category: "",
@@ -79,6 +79,14 @@ const FromIncome = ({ onSaveIncome, onUpdateIncome }) => {
                 className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full">
                 {isAdd ? "Save" : "Update"}
             </button>
+            {
+                !isAdd && <button
+                    onClick={() => onCancel('cancelincome')}
+                    className="mt-6 rounded-md bg-red-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full"
+                >
+                    Cancel
+                </button>
+            }
         </form>
     )
 }

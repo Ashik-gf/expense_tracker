@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FromExpense = ({ onSaveExpense, updateExpense }) => {
+const FromExpense = ({ onSaveExpense, updateExpense, onCancel }) => {
     const [updateToex, setUpdateToex] = useState(updateExpense)
 
     const [expense, setExpense] = useState(updateToex || {
@@ -11,7 +11,7 @@ const FromExpense = ({ onSaveExpense, updateExpense }) => {
 
     })
     const [isAdd, setIsAdd] = useState(Object.is(updateExpense, null))
-
+    console.log(updateExpense);
     const handelExpanseChange = (e) => {
         const name = e.target.name;
         let value = e.target.value;
@@ -79,10 +79,18 @@ const FromExpense = ({ onSaveExpense, updateExpense }) => {
             <button
                 type="button"
                 onClick={() => onSaveExpense(expense, isAdd)}
-                className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full">
+                className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full" >
                 {isAdd ? "Save" : "Update"}
 
             </button>
+            {
+                !isAdd && <button
+                    onClick={() => onCancel('cancelExpense')}
+                    className="mt-6 rounded-md bg-red-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full"
+                >
+                    Cancel
+                </button>
+            }
         </form>
     )
 }

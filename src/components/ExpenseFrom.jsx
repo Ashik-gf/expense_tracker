@@ -2,7 +2,7 @@ import React from 'react';
 import FromExpense from './FormExpense';
 import FromIncome from './FromIncome';
 
-const ExpenseFrom = ({ onSaveIncome, onSaveExpense, updateIncome, updateExpense, openExpense, setOpenExpense }) => {
+const ExpenseFrom = ({ onSaveIncome, onSaveExpense, updateIncome, updateExpense, openExpense, setOpenExpense, onCancel }) => {
 
     return (
         <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md">
@@ -23,10 +23,12 @@ const ExpenseFrom = ({ onSaveIncome, onSaveExpense, updateIncome, updateExpense,
                 openExpense ? <FromIncome
                     onSaveIncome={onSaveIncome}
                     onUpdateIncome={updateIncome}
+                    onCancel={onCancel}
 
                 /> : <FromExpense
                     onSaveExpense={onSaveExpense}
                     updateExpense={updateExpense}
+                    onCancel={onCancel}
                 />
             }
         </div>
