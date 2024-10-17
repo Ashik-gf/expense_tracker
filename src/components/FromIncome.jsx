@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 // Salary, Outsourcing, Bond, Dividend 
-const FromIncome = ({ onSaveIncome }) => {
+const FromIncome = ({ onSaveIncome, onUpdateIncome }) => {
     let counter = 0;
-    const [income, setIncome] = useState({
+    const [income, setIncom] = useState(onUpdateIncome || {
+        id: crypto.randomUUID() + counter++,
+        category: "",
+        date: "",
+        amount: ""
+
     })
-    const [reset, setReset] = useState({})
+    const [isAdd, setIsAdd] = useState(Object.is(onUpdateIncome, null))
     const handelChange = (e) => {
         const name = e.target.name;
         let value = e.target.value;
-        setIncome({
+        setIncom({
             ...income,
             [name]: value,
-            id: crypto.randomUUID() + counter++,
         }
 
         )
     }
+
     return (
         <form>
             {/* category */}
@@ -71,9 +76,9 @@ const FromIncome = ({ onSaveIncome }) => {
 
             <button
                 type="button"
-                onClick={() => onSaveIncome(income)}
+                onClick={() => onSaveIncome(income, setIncom)}
                 className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full">
-                Save
+                {isAdd ? "Save" : "Update"}
             </button>
         </form>
     )

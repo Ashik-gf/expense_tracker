@@ -1,7 +1,12 @@
 import React from 'react';
 
-const IncomeList = ({ incomes, selectedFilter, onDelete, shortData }) => {
-
+const IncomeList = ({ incomes, selectedFilter, onDelete, shortData, onIncomeEdit }) => {
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US',
+            options);
+    }
 
     return (
         <>
@@ -23,7 +28,7 @@ const IncomeList = ({ incomes, selectedFilter, onDelete, shortData }) => {
                     <div key={income.id} className="flex justify-between items-center py-2 relative group cursor-pointer">
                         <div>
                             <h3 className="text-base font-medium leading-7 text-gray-600">{income.category}</h3>
-                            <p className="text-xs text-gray-600">{income.date}</p>
+                            <p className="text-xs text-gray-600">{formatDate(income.date)}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
@@ -33,7 +38,9 @@ const IncomeList = ({ incomes, selectedFilter, onDelete, shortData }) => {
                             {/* <!-- 3 Dots --> */}
                             <div
                                 className="translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 absolute right-0 top-1/2 -translate-y-1/2 transition-all">
-                                <button className="hover:text-teal-600" role="button" title="Edit Button">
+                                <button
+                                    onClick={() => onIncomeEdit(income, true)}
+                                    className="hover:text-teal-600" role="button" title="Edit Button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />

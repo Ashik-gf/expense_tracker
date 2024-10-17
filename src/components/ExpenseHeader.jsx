@@ -16,6 +16,11 @@ const ExpenseHeader = ({ onFilter, onShort }) => {
             // Add the category to selection if it's newly checked
             setSelectedCategory([...selectedCategory, newCategory]);
         }
+
+    }
+    const handelSort = (value) => {
+        onShort(value);
+        setOpenShort(false)
     }
     onFilter(selectedCategory);
 
@@ -70,9 +75,9 @@ const ExpenseHeader = ({ onFilter, onShort }) => {
                         className={` ${openShort ? "" : "hidden"} absolute right-20 z-10 mt-2 -left-20 w-32 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
                         role="menu2" aria-orientation="vertical" aria-labelledby="menu-button2" tabIndex="-1">
                         <div className="py-1" role="none">
-                            <button onClick={() => onShort('lth')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+                            <button onClick={() => handelSort('lth')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
                                 role="menuitem" tabIndex="-1" id="menu-item-0">Low to High</button>
-                            <button onClick={() => onShort('htl')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+                            <button onClick={() => handelSort('htl')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
                                 role="menuitem" tabIndex="-1" id="menu-item-0">High to Low</button>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import IncomeHeader from './IncomeHeader';
 import IncomeList from './IncomeList';
 
-const Income = ({ incomes, onDelete }) => {
+const Income = ({ incomes, onDelete, onIncomeEdit }) => {
     const [selectedFilter, setSelectedFilter] = useState([]);
     const [shortData, setShortData] = useState([])
     const handelSelectedFilter = (selectedCategory) => {
@@ -10,13 +10,6 @@ const Income = ({ incomes, onDelete }) => {
     }
     const handelSort = (d) => {
         setShortData(d)
-        // const shortedeExpense = [...incomes].sort((a, b) => (a.amount - b.amount));
-        // if (d == 'lth') {
-        //     return setShortData(shortedeExpense);
-        // } else if (d == "htl") {
-        //     return setShortData([...incomes].sort((a, b) => (b.amount - a.amount)))
-        // }
-        // return true
     }
 
     return (
@@ -26,14 +19,18 @@ const Income = ({ incomes, onDelete }) => {
                 onSort={handelSort}
             />
             <div className="p-4 divide-y">
+                {
+                    incomes.length > 0 ? <IncomeList
+                        selectedFilter={selectedFilter}
+                        incomes={incomes}
+                        onDelete={onDelete}
+                        shortData={shortData}
+                        onIncomeEdit={onIncomeEdit}
 
-                <IncomeList
-                    selectedFilter={selectedFilter}
-                    incomes={incomes}
-                    onDelete={onDelete}
-                    shortData={shortData}
-                />
-
+                    /> : <p className=' text-red-500'>
+                        No Income Update
+                    </p>
+                }
             </div>
         </div>
     )

@@ -18,6 +18,11 @@ const IncomeHeader = ({ onSelected, onSort }) => {
         }
 
     }
+    // shortahndel 
+    const handelSort = (value) => {
+        onSort(value);
+        setOpenShort(false)
+    }
     onSelected(selectedCategory)
     return (
         <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -65,10 +70,13 @@ const IncomeHeader = ({ onSelected, onSort }) => {
                     <div
                         className={`${openShort ? "" : "hidden"} ${openFilter && "hidden"} absolute z-10 mt-2 left-5 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
                         role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
-                        <div className="py-1" role="none">
-                            <button onClick={() => onSort("lth")} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+                        <div
+                            onClick={() => setOpenShort(!openShort)}
+                            className="py-1" role="none">
+                            <button
+                                onClick={() => handelSort("lth")} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
                                 role="menuitem" tabIndex="-1" id="menu-item-0">Low to High</button>
-                            <button onClick={() => onSort("htl")} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+                            <button onClick={() => handelSort("htl")} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
                                 role="menuitem" tabIndex="-1" id="menu-item-0">High to Low</button>
                         </div>
                     </div>

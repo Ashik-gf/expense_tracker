@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ExpenseHeader from './ExpenseHeader';
 import ExpenseList from './ExpenseList';
 
-const Expense = ({ expenses, onDelete }) => {
+const Expense = ({ expenses, onDelete, onExpenseEdit }) => {
     const [filterExpense, setFilterExpense] = useState([]);
     const [lowTohigh, setLowtoHigh] = useState('');
     const [shortData, setShortData] = useState(expenses);
@@ -18,12 +18,20 @@ const Expense = ({ expenses, onDelete }) => {
             {/* <!-- Header --> */}
             <ExpenseHeader onShort={handelSort} onFilter={handelFilter} />
             {/* expenseList */}
-            <ExpenseList
-                onDelete={onDelete}
-                expenses={expenses}
-                filterExpense={filterExpense}
-                shortData={shortData}
-            />
+            <div className="p-4 divide-y">
+                {
+                    expenses.length > 0 ? <ExpenseList
+                        onDelete={onDelete}
+                        expenses={expenses}
+                        filterExpense={filterExpense}
+                        shortData={shortData}
+                        onExpenseEdit={onExpenseEdit}
+
+                    /> : <p className=' text-red-500'>
+                        No Expense Update
+                    </p>
+                }
+            </div>
 
         </div>
     )

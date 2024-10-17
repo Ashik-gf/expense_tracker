@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 
-const FromExpense = ({ onSaveExpense }) => {
+const FromExpense = ({ onSaveExpense, updateExpense }) => {
+    const [updateToex, setUpdateToex] = useState(updateExpense)
     let counter = 0;
-    const [expense, setExpense] = useState({
+    const [expense, setExpense] = useState(updateToex || {
+        id: crypto.randomUUID() + counter++,
+        category: "",
+        date: "",
+        amount: ""
+
     })
+    const [isAdd, setIsAdd] = useState(Object.is(updateExpense, null))
+
     const handelExpanseChange = (e) => {
         const name = e.target.name;
         let value = e.target.value;
         setExpense({
             ...expense,
             [name]: value,
-            id: crypto.randomUUID() + counter++,
         })
     }
 
@@ -73,7 +80,7 @@ const FromExpense = ({ onSaveExpense }) => {
                 type="button"
                 onClick={() => onSaveExpense(expense)}
                 className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full">
-                Save
+                {isAdd ? "Save" : "Update"}
 
             </button>
         </form>

@@ -24,7 +24,6 @@ const TotalExpenseBord = ({ incomes, expenses }) => {
 
     const totalBalance = (totalAmount - totalExpensesAmount)
     const balance = totalBalance < 0 ? "text-red-500" : "text-gray-500"
-    console.log(balance);
 
     return (
 

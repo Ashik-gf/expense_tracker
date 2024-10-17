@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import FromExpense from './FormExpense'
-import FromIncome from './FromIncome'
+import React from 'react';
+import FromExpense from './FormExpense';
+import FromIncome from './FromIncome';
 
-const ExpenseFrom = ({ onSaveIncome, onSaveExpense }) => {
-    const [openExpense, setOpenExpense] = useState(false)
+const ExpenseFrom = ({ onSaveIncome, onSaveExpense, updateIncome, updateExpense, openExpense, setOpenExpense }) => {
+
     return (
         <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md">
             <h2 className="text-3xl font-semibold leading-7 text-gray-800 text-center">Expense Tracker</h2>
@@ -20,7 +20,14 @@ const ExpenseFrom = ({ onSaveIncome, onSaveExpense }) => {
                 </button>
             </div>
             {
-                openExpense ? <FromIncome onSaveIncome={onSaveIncome} /> : <FromExpense onSaveExpense={onSaveExpense} />
+                openExpense ? <FromIncome
+                    onSaveIncome={onSaveIncome}
+                    onUpdateIncome={updateIncome}
+
+                /> : <FromExpense
+                    onSaveExpense={onSaveExpense}
+                    updateExpense={updateExpense}
+                />
             }
         </div>
     )
